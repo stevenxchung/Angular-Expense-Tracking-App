@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormComponent } from './form/form.component';
-import { DisplayComponent } from './display/display.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 // This is where the URL routes will be
 const routes: Routes = [
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'expenses',
-    component: DisplayComponent
+    component: ExpensesComponent
   }
 ];
 
