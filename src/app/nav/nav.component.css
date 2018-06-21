@@ -6,3 +6,43 @@
   width: 200px;
   box-shadow: 3px 0 6px rgba(0,0,0,.24);
 }
+
+.hidden {
+  display: none;
+}
+
+.hiddenLinks {
+  display: none;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-icon {
+  position: absolute;
+  margin-top: 19px;
+}
+
+.links a {
+  display: inline-block;
+  margin: 15px 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.links {
+  width: 10%;
+  height: 100%;
+  text-align: center;
+}
+
+.activated {
+  color: #f20bfa !important;
+}
+
+span:nth-of-type(3) {
+  border-left: 1px solid rgba(0,0,0,.08);
+  border-right: 1px solid rgba(0,0,0,.08);
+}
+
