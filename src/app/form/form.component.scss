@@ -1,0 +1,54 @@
+.container {
+    display: grid;
+    grid-template-columns: 50% auto;
+    color: white;
+    font-family: Roboto;
+}
+
+.col {
+    padding: .4em 1.3em;
+}
+
+.color-dark {
+    background: #673ab7;
+}
+
+.color-light {
+    background: #5f21c9;
+}
+
+input.txt {
+    border: 0;
+    padding: 1em;
+    width: 80%;
+    margin-bottom: 2em;
+    font-family: Roboto;
+}
+
+input.btn {
+    border: 0;
+    display:block;
+    padding:1em 3em;
+    background:rgb(127, 255, 77);
+    color:#003A61;
+    margin-bottom:1em;
+    cursor:pointer;
+    font-family: Roboto;
+}
+
+.life-container {
+    background:#3FA0E1;
+    padding:.5em;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#forms {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
