@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 export class DataService {
 
-  private dB = new BehaviorSubject<any>(['Rent']);
+  private dB = new BehaviorSubject<any>([]);
   expense = this.dB.asObservable();
 
   constructor() { }
