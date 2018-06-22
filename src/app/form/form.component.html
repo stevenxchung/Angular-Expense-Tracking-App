@@ -40,7 +40,13 @@
   </div>
   <div class="col">
     <p class="life-container" *ngFor="let e of formDB">
-      {{ e.expenseName + ' ' + '-' + ' ' + '$' + e.expenseAmount }}
+      {{
+        e.expenseName
+        + ' ' + '-----' + ' '
+        + '$' + e.expenseAmount
+        + ' ' + '-----' + ' '
+        + e.timeStamp
+      }}
     </p>
   </div>
 </div>
