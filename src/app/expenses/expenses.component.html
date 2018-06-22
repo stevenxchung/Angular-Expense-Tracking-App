@@ -1,3 +1,11 @@
-<p>
-  expenses works!
-</p>
+<ul>
+  <li *ngFor="let e of expenses">
+    {{
+      e.expenseName
+      + ' ' + '-----' + ' '
+      + '$' + e.expenseAmount
+      + ' ' + '-----' + ' '
+      + e.timeStamp +'\n'
+    }}
+  </li>
+</ul>
