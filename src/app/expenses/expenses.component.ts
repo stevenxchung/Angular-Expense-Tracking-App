@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-expenses',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpensesComponent implements OnInit {
 
-  constructor() { }
+  expenses: any;
+
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.expense.subscribe(res => this.expenses = res);
+    // console.log(this.expenses);
   }
 
 }
