@@ -31,7 +31,9 @@ export class FormComponent implements OnInit {
     this.newExp = new Expense();
     // Set the name and amount for this new object equal to what is submitted on the form
     this.newExp.expenseName = this.name;
-    this.newExp.expenseAmount = this.amount
+    this.newExp.expenseAmount = this.amount;
+    this.newExp.timeStamp = new Date();
+
 
     // Add the newly created object to the formDB array
     this.formDB.unshift(this.newExp);
@@ -49,4 +51,5 @@ export class FormComponent implements OnInit {
 export class Expense {
   expenseName: string;
   expenseAmount: number;
+  timeStamp: Object;
 }
