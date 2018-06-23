@@ -6,6 +6,9 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 // Two way data-binding which will allow the form to retrieve and set it's value from the component class
 import { FormsModule } from '@angular/forms';
 
+// Adding BriteCharts
+// import { LineChartModule } from '@colap-dev/ngx-britecharts/dist';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
@@ -30,7 +33,8 @@ import { DataService } from './data.service';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule
+    FormsModule,
+    // LineChartModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
