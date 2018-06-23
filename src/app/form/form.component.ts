@@ -32,6 +32,8 @@ export class FormComponent implements OnInit {
     // Set the name and amount for this new object equal to what is submitted on the form
     this.newExp.expenseName = this.name;
     this.newExp.expenseAmount = this.amount;
+    // Probably going to add another form for this data in the future as
+    // the user should log when he/she actually made the purchase
     this.newExp.timeStamp = new Date();
 
 
