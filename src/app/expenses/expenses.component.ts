@@ -30,6 +30,10 @@ export class ExpensesComponent implements OnInit {
     this.expenses.map(e => this.itemDB.push(e.expenseName));
     this.expenses.map(e => this.priceDB.push(e.expenseAmount));
 
+    // Sort by date
+    this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
+    console.log(this.expenses);
+
     // Add dates, do not duplicate
     this.expenses.map(e => {
       // Check if timestamp already exists, if not add to DB
@@ -37,54 +41,30 @@ export class ExpensesComponent implements OnInit {
         this.dateDB.push(e.timeStamp)
     });
 
-    // Sort by date
-    this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
-    console.log(this.expenses);
-
-    // Loop through each element in dateDB (sorted)
-    for (var i = 0; i < this.dateDB.length; i++) {
-      // Loop through each element in expenses
-      for (var j = 0; j < this.expenses.length; j++) {
-        // If the date matches add data according to label
-        if (this.expenses[j].timeStamp === this.dateDB[i]) {
-          if (this.expenses[j].expenseGroup === 'Food') {
-            this.arr[0].data.push(this.expenses[j].expenseAmount);
-            // All other items should be zero
-            for (var k = 1; k < this.arr.length; k++) {
+    // Loop through each element in the arr database
+    for (var k = 0; k < this.arr.length; k++) {
+      // Loop through each element in dateDB (sorted)
+      for (var i = 0; i < this.dateDB.length; i++) {
+        // Loop through each element in expenses
+        for (var j = 0; j < this.expenses.length; j++) {
+          // Check if the label matches
+          if (this.expenses[j].expenseGroup === this.arr[k].label) {
+            // Check if the timestamp matches
+            if (this.expenses[j].timeStamp === this.dateDB[i]) {
+              this.arr[k].data.push(this.expenses[j].expenseAmount);
+            } else {
+              // Add a zero where data does not exist
               this.arr[k].data.push(0);
             }
-          } else if (this.expenses[j].expenseGroup === 'Gas') {
-            this.arr[1].data.push(this.expenses[j].expenseAmount);
-            // All other items should be zero
-            for (var k = 0; k < this.arr.length; k++) {
-              if (k === 1) {
-                continue;
-              }
-              this.arr[k].data.push(0);
-            }
-          } else if (this.expenses[j].expenseGroup === 'Utilities') {
-            this.arr[2].data.push(this.expenses[j].expenseAmount);
-            // All other items should be zero
-            for (var k = 0; k < this.arr.length; k++) {
-              if (k === 2) {
-                continue;
-              }
-              this.arr[k].data.push(0);
-            }
-          } else if (this.expenses[j].expenseGroup === 'Other') {
-            this.arr[3].data.push(this.expenses[j].expenseAmount);
-            // All other items should be zero
-            for (var k = 0; k < this.arr.length - 1; k++) {
-              this.arr[k].data.push(0);
-            }
+          } else {
+            // Else, continue to the next expense
+            continue;
           }
-        } else {
-          // Else, if the timestamp does not match, continue
-          continue;
         }
       }
     }
     console.log(this.arr);
+
   }
 
   // Add line chart from ng2-charts
