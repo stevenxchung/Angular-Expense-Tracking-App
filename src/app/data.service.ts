@@ -9,6 +9,7 @@ export class DataService {
 
   private dB = new BehaviorSubject<any>(
     [
+      {expenseGroup: "Food", expenseName: "New Water", expenseAmount: 89.99, timeStamp: "1993-09-29"},
       {expenseGroup: "Utilities", expenseName: "Water", expenseAmount: 69.99, timeStamp: "1993-09-29"},
       {expenseGroup: "Gas", expenseName: "Gas", expenseAmount: 18.75, timeStamp: "1993-09-30"},
       {expenseGroup: "Utilities", expenseName: "Internet", expenseAmount: 49.99, timeStamp: "1993-10-01"},
