@@ -11,7 +11,7 @@
 </ul> -->
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 col-sm-6">
     <div style="display: block;">
     <canvas baseChart width="400" height="400"
                 [datasets]="lineChartData"
@@ -24,15 +24,19 @@
                 (chartClick)="chartClicked($event)"></canvas>
     </div>
   </div>
-  <div class="col-md-6" style="margin-bottom: 10px">
+  <div class="col-md-6 col-sm-6" style="margin-bottom: 10px">
+    <button class="btn" (click)="randomize()">Change Dataset</button>
     <table class="table table-responsive table-condensed">
-      <tr>
-        <th *ngFor="let label of lineChartLabels">{{label}}</th>
-      </tr>
-      <tr *ngFor="let d of lineChartData">
-        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+      <h1>Most Recent Expenses</h1>
+      <tr *ngFor="let e of expenses.reverse()">
+          {{
+            'Item: ' + e.expenseName
+            + ' ' + '-----' + ' '
+            + 'Amount: ' + '$' + e.expenseAmount
+            + ' ' + '-----' + ' '
+            + 'Date: ' + e.timeStamp +'\n'
+          }}
       </tr>
     </table>
-    <button (click)="randomize()">CLICK</button>
   </div>
 </div>
