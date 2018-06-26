@@ -10,8 +10,10 @@ export class FormComponent implements OnInit {
 
   // Initialize types
   itemCount: number;
+  group: string;
   name: string = 'Water';
   amount: number = 69.99;
+  date: string = '1993-09-29';
   formDB = [];
 
   public newExp: Expense;
@@ -29,17 +31,17 @@ export class FormComponent implements OnInit {
   addExpense() {
     // Create a new object
     this.newExp = new Expense();
-    // Set the name and amount for this new object equal to what is submitted on the form
+    // Set the group, name, and amount for this new object equal to what is submitted on the form
+    this.newExp.expenseGroup = this.group;
     this.newExp.expenseName = this.name;
     this.newExp.expenseAmount = this.amount;
-    // Probably going to add another form for this data in the future as
-    // the user should log when he/she actually made the purchase
-    this.newExp.timeStamp = new Date();
+    // Date of actual purchase
+    this.newExp.timeStamp = this.date;
 
 
     // Add the newly created object to the formDB array
     this.formDB.unshift(this.newExp);
-    // console.log(this.formDB);
+    console.log(this.formDB);
 
     // Reset values after submit
     this.name = '';
@@ -51,7 +53,8 @@ export class FormComponent implements OnInit {
 }
 // Expense blueprint
 export class Expense {
+  expenseGroup: string;
   expenseName: string;
   expenseAmount: number;
-  timeStamp: Object;
+  timeStamp: string;
 }
