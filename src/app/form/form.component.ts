@@ -24,6 +24,8 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.itemCount = this.formDB.length;
     this.dataService.expense.subscribe(res => this.formDB = res);
+    // Sort database by date from largest to smallest
+    this.formDB.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
     this.dataService.updateDB(this.formDB);
   }
 
@@ -47,6 +49,7 @@ export class FormComponent implements OnInit {
     this.name = '';
     this.amount = 0;
     this.itemCount = this.formDB.length;
+    this.formDB.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
     this.dataService.updateDB(this.formDB);
   }
 
