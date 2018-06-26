@@ -45,16 +45,17 @@ export class ExpensesComponent implements OnInit {
     for (var k = 0; k < this.arr.length; k++) {
       // Loop through each element in dateDB (sorted)
       for (var i = 0; i < this.dateDB.length; i++) {
+        // Prefill the data arrays
+        this.arr[k].data.push(0);
         // Loop through each element in expenses
         for (var j = 0; j < this.expenses.length; j++) {
           // Check if the label matches
           if (this.expenses[j].expenseGroup === this.arr[k].label) {
             // Check if the timestamp matches
             if (this.expenses[j].timeStamp === this.dateDB[i]) {
-              this.arr[k].data.push(this.expenses[j].expenseAmount);
+              this.arr[k].data[i] = this.expenses[j].expenseAmount;
             } else {
-              // Add a zero where data does not exist
-              this.arr[k].data.push(0);
+              continue;
             }
           } else {
             // Else, continue to the next expense
@@ -75,30 +76,38 @@ export class ExpensesComponent implements OnInit {
     responsive: true
   };
   public lineChartColors:Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+    { // Green
+      backgroundColor: 'rgba(0,255,0,0.25)',
+      borderColor: 'rgba(0,255,0,1)',
+      pointBackgroundColor: 'rgba(0,0,0,1)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
-    // { // dark grey
-    //   backgroundColor: 'rgba(77,83,96,0.2)',
-    //   borderColor: 'rgba(77,83,96,1)',
-    //   pointBackgroundColor: 'rgba(77,83,96,1)',
-    //   pointBorderColor: '#fff',
-    //   pointHoverBackgroundColor: '#fff',
-    //   pointHoverBorderColor: 'rgba(77,83,96,1)'
-    // },
-    // { // grey
-    //   backgroundColor: 'rgba(148,159,177,0.2)',
-    //   borderColor: 'rgba(148,159,177,1)',
-    //   pointBackgroundColor: 'rgba(148,159,177,1)',
-    //   pointBorderColor: '#fff',
-    //   pointHoverBackgroundColor: '#fff',
-    //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    // }
+    { // Red
+      backgroundColor: 'rgba(255,0,0,0.25)',
+      borderColor: 'rgba(255,0,0,1)',
+      pointBackgroundColor: 'rgba(0,0,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    },
+    { // Blue
+      backgroundColor: 'rgba(0,0,255,0.25)',
+      borderColor: 'rgba(0,0,255,1)',
+      pointBackgroundColor: 'rgba(0,0,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    { // Violet
+      backgroundColor: 'rgba(127,0,255,0.25)',
+      borderColor: 'rgba(127,0,255,1)',
+      pointBackgroundColor: 'rgba(0,0,0,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
   ];
   public lineChartLegend:boolean = true;
   public lineChartType:string = 'line';
