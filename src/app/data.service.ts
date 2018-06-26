@@ -15,7 +15,8 @@ export class DataService {
       {expenseGroup: "Utilities", expenseName: "Internet", expenseAmount: 49.99, timeStamp: "1993-10-01"},
       {expenseGroup: "Gas", expenseName: "Gas", expenseAmount: 21.50, timeStamp: "1993-10-10"},
       {expenseGroup: "Utilities", expenseName: "Electric", expenseAmount: 150.35, timeStamp: "1993-10-05"},
-      {expenseGroup: "Gas", expenseName: "Gas", expenseAmount: 24.52, timeStamp: "1993-10-18"}
+      {expenseGroup: "Gas", expenseName: "Gas", expenseAmount: 24.52, timeStamp: "1993-10-18"},
+      {expenseGroup: "Other", expenseName: "Concert", expenseAmount: 175.42, timeStamp: "1993-11-10"}
     ]
   );
   expense = this.dB.asObservable();
