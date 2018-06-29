@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { NavComponent } from './nav/nav.component';
-import { ExpensesComponent } from './expenses/expenses.component';
+import { TrendsComponent } from './trends/trends.component';
 import { DataService } from './data.service';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { DataService } from './data.service';
     AppComponent,
     FormComponent,
     NavComponent,
-    ExpensesComponent
+    TrendsComponent
   ],
   imports: [
     BrowserModule,
