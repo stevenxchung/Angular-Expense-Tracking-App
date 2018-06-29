@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'trends',
     component: TrendsComponent
-  }
+  },
   {
     path: 'summary',
     component: SummaryComponent
