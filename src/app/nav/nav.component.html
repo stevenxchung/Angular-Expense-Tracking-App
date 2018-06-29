@@ -15,9 +15,9 @@
         Form
       </a>
       <a mat-list-item routerLink="/expenses">
-        <mat-icon>bar_chart</mat-icon>
+        <mat-icon>trending_up</mat-icon>
         &nbsp;&nbsp;
-        Expenses
+        Trends
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -33,15 +33,15 @@
       </button>
       <span>Expense Tracking App</span>
       <span class="spacer"></span>
-      <span 
+      <span
         class="links"
         [ngClass]="{hiddenLinks: (isHandset$ | async)}"
       >
-        <mat-icon 
+        <mat-icon
           class="nav-icon"
         >list</mat-icon>
-        <a 
-          routerLink="" 
+        <a
+          routerLink=""
           [class.activated]="currentUrl == '/'"
         >
         &nbsp;&nbsp;&nbsp;&nbsp;Form</a>
@@ -50,14 +50,14 @@
         class="links"
         [ngClass]="{hiddenLinks: (isHandset$ | async)}"
       >
-        <mat-icon 
+        <mat-icon
           class="nav-icon"
-        >bar_chart</mat-icon>
-        <a 
-          routerLink="/expenses"
-          [class.activated]="currentUrl == '/expenses'"
+        >trending_up</mat-icon>
+        <a
+          routerLink="/trends"
+          [class.activated]="currentUrl == '/trends'"
         >
-        &nbsp;&nbsp;&nbsp;&nbsp;Expenses</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;Trends</a>
       </span>
     </mat-toolbar>
     <ng-content></ng-content>
