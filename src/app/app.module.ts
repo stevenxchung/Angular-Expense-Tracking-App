@@ -16,13 +16,15 @@ import { FormComponent } from './form/form.component';
 import { NavComponent } from './nav/nav.component';
 import { TrendsComponent } from './trends/trends.component';
 import { DataService } from './data.service';
+import { SummaryComponent } from './summary/summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormComponent,
     NavComponent,
-    TrendsComponent
+    TrendsComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
