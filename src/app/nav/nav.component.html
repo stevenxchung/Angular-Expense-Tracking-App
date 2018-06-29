@@ -15,6 +15,11 @@
         Form
       </a>
       <a mat-list-item routerLink="/expenses">
+        <mat-icon>pie_chart</mat-icon>
+        &nbsp;&nbsp;
+        Summary
+      </a>
+      <a mat-list-item routerLink="/expenses">
         <mat-icon>trending_up</mat-icon>
         &nbsp;&nbsp;
         Trends
@@ -45,6 +50,19 @@
           [class.activated]="currentUrl == '/'"
         >
         &nbsp;&nbsp;&nbsp;&nbsp;Form</a>
+      </span>
+      <span
+        class="links"
+        [ngClass]="{hiddenLinks: (isHandset$ | async)}"
+      >
+        <mat-icon
+          class="nav-icon"
+        >pie_chart</mat-icon>
+        <a
+          routerLink="/summary"
+          [class.activated]="currentUrl == '/summary'"
+        >
+        &nbsp;&nbsp;&nbsp;&nbsp;Summary</a>
       </span>
       <span
         class="links"
