@@ -41,8 +41,7 @@
   color: #f20bfa !important;
 }
 
-span:nth-of-type(3) {
+/* span:nth-child(-n+2) {
   border-left: 1px solid rgba(0,0,0,.08);
   border-right: 1px solid rgba(0,0,0,.08);
-}
-
+} */
