@@ -62,7 +62,7 @@
 
   </div>
   <div class="col">
-    <p class="life-container" *ngFor="let e of formDB">
+    <p class="life-container" *ngFor="let e of formDB; let i = index" (click)="removeItem(i)">
       {{
         'Item: ' + e.expenseName
         + ' ' + '-----' + ' '
