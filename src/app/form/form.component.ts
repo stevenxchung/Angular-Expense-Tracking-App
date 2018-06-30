@@ -22,11 +22,12 @@ export class FormComponent implements OnInit {
 
   // Called after data-bound properties of a directive are initialized
   ngOnInit() {
-    this.itemCount = this.formDB.length;
     this.dataService.expense.subscribe(res => this.formDB = res);
     // Sort database by date from largest to smallest
     this.formDB.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
     this.dataService.updateDB(this.formDB);
+    // Update item count
+    this.itemCount = this.formDB.length;
   }
 
   // Add expense to recent expenses
