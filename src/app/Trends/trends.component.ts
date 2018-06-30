@@ -11,10 +11,10 @@ export class TrendsComponent implements OnInit {
 
   expenses: any;
   arr = [
-    {data: [], label: 'Food'},
-    {data: [], label: 'Gas'},
-    {data: [], label: 'Utilities'},
-    {data: [], label: 'Other'}
+    {data: [], label: 'Food [$]'},
+    {data: [], label: 'Gas [$]'},
+    {data: [], label: 'Utilities [$]'},
+    {data: [], label: 'Other [$]'}
   ];
   itemDB = [];
   priceDB = [];
