@@ -1,10 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+// Import animations
+import {
+  trigger,
+  style,
+  transition,
+  animate,
+  keyframes,
+  query,
+  stagger
+} from '@angular/animations';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
+  animations: [
+    trigger('formDB', [
+        transition('* => *', [
+            query(':enter', style({ opacity: 0}), {optional: true}),
+
+            // Animation when adding an element to the list
+            query(':enter', stagger('300ms', [
+              animate('.6s ease-in', keyframes([
+                style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+                style({opacity: .5, transform: 'translateY(35px)', offset: .3}),
+                style({opacity: 1, transform: 'translateY(0)', offset: 1}),
+
+              ]))
+            ]), {optional: true}),
+
+            // Animation when removing an element from the list
+            query(':leave', stagger('300ms', [
+              animate('.6s ease-in', keyframes([
+                style({opacity: 1, transform: 'translateY(0)', offset: 0}),
+                style({opacity: .5, transform: 'translateY(35px)', offset: .3}),
+                style({opacity: 0, transform: 'translateY(-75%)', offset: 1}),
+
+              ]))
+            ]), {optional: true})
+        ])
+    ])
+  ]
 })
 export class FormComponent implements OnInit {
 
@@ -53,6 +90,16 @@ export class FormComponent implements OnInit {
     this.formDB.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
     this.dataService.updateDB(this.formDB);
   }
+
+    // Remove and item from the list
+    removeItem(i) {
+      let result = confirm("Are you sure you want to delete this entry?");
+      // If result is true, the specified entry will be deleted
+      if (result) {
+        this.formDB.splice(i, 1);
+      }
+      this.dataService.updateDB(this.formDB);
+    }
 
 }
 // Expense blueprint
