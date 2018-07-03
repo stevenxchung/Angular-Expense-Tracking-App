@@ -1,1 +1,25 @@
+.card {
+    border: 1px solid rgba($color: #000000, $alpha: 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba($color: #000000, $alpha: 0.9);
+}
 
+.btn {
+    border: 0;
+    display:block;
+    padding:1em 3em;
+    background:rgb(127, 255, 77);
+    color:#003A61;
+    margin-bottom:1em;
+    cursor:pointer;
+    font-family: Roboto;
+}
+
+.expense-table {
+    color: white;
+    background-color: #673ab7;
+    padding: 50px;
+    padding-left: 50px;
+    border-radius: 10px;
+}
