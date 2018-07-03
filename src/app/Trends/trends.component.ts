@@ -32,7 +32,7 @@ export class TrendsComponent implements OnInit {
 
     // Sort by date
     this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
-    console.log(this.expenses);
+    // console.log(this.expenses);
 
     // Add dates, do not duplicate
     this.expenses.map(e => {
@@ -64,6 +64,7 @@ export class TrendsComponent implements OnInit {
         }
       }
     }
+    // Check outcome
     console.log(this.arr);
 
   }
