@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-summary',
@@ -7,24 +9,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor() { }
+  expenses: any;
+  // Initial total values for food, gas, utilities, and other expenses respectively
+  arr = [0, 0, 0, 0];
+
+  constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
+    this.dataService.expense.subscribe(res => this.expenses = res);
+    console.log(this.expenses);
+
+    // Use map() to find the totals for each
+    for (var i = 0; i < this.expenses.length; i++) {
+      if (this.expenses[i].expenseGroup === "Food [$]") {
+        this.arr[0] += this.expenses[i].expenseAmount;
+      } else if (this.expenses[i].expenseGroup === "Gas [$]") {
+        this.arr[1] += this.expenses[i].expenseAmount;
+      } else if (this.expenses[i].expenseGroup === "Utilities [$]") {
+        this.arr[2] += this.expenses[i].expenseAmount;
+      } else {
+        this.arr[3] += this.expenses[i].expenseAmount;
+      }
+    }
+    console.log(this.arr);
+
   }
 
   // Doughnut
-  public doughnutChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-  public doughnutChartData:number[] = [350, 450, 100];
+  public doughnutChartLabels:string[] = ['Food [$]', 'Gas [$]', 'Utilities [$]', 'Other [$]'];
+  public doughnutChartData:number[] = this.arr;
   public doughnutChartType:string = 'doughnut';
 
-  // Radar
-  public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
-
-  public radarChartData:any = [
-    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
+  public doughnutChartColors:Array<any> = [
+    {
+      backgroundColor: ['rgba(0,255,0,0.75)', 'rgba(255,0,0,0.75)', 'rgba(0,0,255,0.75)', 'rgba(127,0,255,0.75)'],
+      borderColor: 'white'
+    }
   ];
-  public radarChartType:string = 'radar';
 
   // events
   public chartClicked(e:any):void {
