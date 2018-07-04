@@ -42,18 +42,18 @@ export class TrendsComponent implements OnInit {
     });
 
     // Loop through each element in the arr database
-    for (var k = 0; k < this.arr.length; k++) {
+    for (var x = 0; x < this.arr.length; x++) {
       // Loop through each element in dateDB (sorted)
-      for (var i = 0; i < this.dateDB.length; i++) {
+      for (var y = 0; y < this.dateDB.length; y++) {
         // Prefill the data arrays
-        this.arr[k].data.push(0);
+        this.arr[x].data.push(0);
         // Loop through each element in expenses
-        for (var j = 0; j < this.expenses.length; j++) {
+        for (var z = 0; z < this.expenses.length; z++) {
           // Check if the label matches
-          if (this.expenses[j].expenseGroup === this.arr[k].label) {
+          if (this.expenses[z].expenseGroup === this.arr[x].label) {
             // Check if the timestamp matches
-            if (this.expenses[j].timeStamp === this.dateDB[i]) {
-              this.arr[k].data[i] = this.expenses[j].expenseAmount;
+            if (this.expenses[z].timeStamp === this.dateDB[y]) {
+              this.arr[x].data[y] = this.expenses[z].expenseAmount;
             } else {
               continue;
             }
