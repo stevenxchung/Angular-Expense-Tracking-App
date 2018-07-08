@@ -19,6 +19,9 @@ export class SummaryComponent implements OnInit {
     this.dataService.expense.subscribe(res => this.expenses = res);
     // console.log(this.expenses);
 
+    // Sort by date
+    this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
+
     // Loop through the expenses database
     for (var i = 0; i < this.expenses.length; i++) {
       // If the expenseGroup in object 'i' matches, add that expense amount
