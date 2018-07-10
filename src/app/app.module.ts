@@ -6,9 +6,12 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 // Two way data-binding which will allow the form to retrieve and set it's value from the component class
 import { FormsModule } from '@angular/forms';
 
+// Firebase
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 // Adding ng2-charts
 import { ChartsModule } from 'ng2-charts';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +20,7 @@ import { NavComponent } from './nav/nav.component';
 import { TrendsComponent } from './trends/trends.component';
 import { DataService } from './data.service';
 import { SummaryComponent } from './summary/summary.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { SummaryComponent } from './summary/summary.component';
     MatIconModule,
     MatListModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
