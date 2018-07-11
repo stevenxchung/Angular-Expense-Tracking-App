@@ -1,0 +1,117 @@
+<div class="container color-dark">
+    <div class="col">
+      <p>Expense Form</p>
+    </div>
+    <div class="col">
+      <p>Recent Expenses</p>
+    </div>
+  </div>
+  <div class="container color-light">
+    <div class="col">
+
+      <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
+        <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="dataService.selectedExpense.$key">
+        <!-- <div>
+          <label for="group">Expense Group</label>
+          <select
+            type="text"
+            class="txt"
+            name="group"
+            #expenseGroup="ngModel"
+            [(ngModel)]="dataService.selectedExpense.expenseGroup"
+            required
+          >
+            <option value="" disabled selected>Choose A Group</option>
+            <option value="Food [$]">Food</option>
+            <option value="Gas [$]">Gas</option>
+            <option value="Utilities [$]">Utilities</option>
+            <option value="Other [$]">Other</option>
+          </select>
+        </div> -->
+        <div class="form-group">
+            <label for="group">Expense Group</label>
+            <input
+              class="form-control"
+              name="group"
+              #expenseGroup="ngModel"
+              placeholder="Enter the name of your expense group..."
+              [(ngModel)]="dataService.selectedExpense.expenseGroup"
+              required
+            >
+        </div>
+        <div class="form-group">
+          <label for="item">Expense Name</label>
+          <input
+            class="form-control"
+            name="item"
+            #expenseName="ngModel"
+            placeholder="Enter the name of your expense..."
+            [(ngModel)]="dataService.selectedExpense.expenseName"
+            required
+          >
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input
+              class="form-control"
+              type="number"
+              name="amount"
+              #expenseAmount="ngModel"
+              placeholder="Enter the amount..."
+              min="0.01"
+              step="0.01"
+              [(ngModel)]="dataService.selectedExpense.expenseAmount"
+              required
+            >
+        </div>
+        <div class="form-group">
+            <label for="date">Transaction Date</label>
+            <input
+              class="form-control"
+              type="date"
+              name="date"
+              #timeStamp="ngModel"
+              placeholder="Enter the date..."
+              [(ngModel)]="dataService.selectedExpense.timeStamp"
+              required
+            >
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default" type="submit" [disabled]="!expenseForm.valid">
+              <i class="fa fa-floppy-o"></i>
+              Submit</button>
+            <button class="btn btn-default" type="button" (click)="resetForm(expenseForm)">
+              <i class="fa fa-repeat"></i>
+              Reset</button>
+          </div>
+      </form>
+
+    </div>
+    <div class="col">
+      <!-- <p class="life-container" *ngFor="let e of formDB; let i = index" (click)="removeItem(i)">
+        {{
+          'Item: ' + e.expenseName
+          + ' ' + '-----' + ' '
+          + 'Amount: ' + '$' + e.expenseAmount
+          + ' ' + '-----' + ' '
+          + 'Date: ' + e.timeStamp +'\n'
+        }}
+      </p> -->
+      <table class="table table-sm table-hover">
+        <tr *ngFor="let expense of expenseList">
+          <td>{{ expense.expenseGroup }}</td>
+          <td>{{ expense.expenseName }}</td>
+          <td>{{ expense.expenseAmount }}</td>
+          <td>{{ expense.timeStamp }}</td>
+          <td>
+            <a class="btn" (click)="onEdit(expense)">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+            <a class="btn" (click)="onDelete(expense.$key)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
