@@ -16,28 +16,28 @@ export class SummaryComponent implements OnInit {
   constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    this.dataService.expense.subscribe(res => this.expenses = res);
-    // console.log(this.expenses);
+    // this.dataService.expense.subscribe(res => this.expenses = res);
+    // // console.log(this.expenses);
 
-    // Sort by date
-    this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
+    // // Sort by date
+    // this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
 
-    // Loop through the expenses database
-    for (var i = 0; i < this.expenses.length; i++) {
-      // If the expenseGroup in object 'i' matches, add that expense amount
-      // to a particular slot in the arr above
-      if (this.expenses[i].expenseGroup === "Food [$]") {
-        this.arr[0] += this.expenses[i].expenseAmount;
-      } else if (this.expenses[i].expenseGroup === "Gas [$]") {
-        this.arr[1] += this.expenses[i].expenseAmount;
-      } else if (this.expenses[i].expenseGroup === "Utilities [$]") {
-        this.arr[2] += this.expenses[i].expenseAmount;
-      } else {
-        this.arr[3] += this.expenses[i].expenseAmount;
-      }
-    }
-    // Check outcome
-    console.log(this.arr);
+    // // Loop through the expenses database
+    // for (var i = 0; i < this.expenses.length; i++) {
+    //   // If the expenseGroup in object 'i' matches, add that expense amount
+    //   // to a particular slot in the arr above
+    //   if (this.expenses[i].expenseGroup === "Food [$]") {
+    //     this.arr[0] += this.expenses[i].expenseAmount;
+    //   } else if (this.expenses[i].expenseGroup === "Gas [$]") {
+    //     this.arr[1] += this.expenses[i].expenseAmount;
+    //   } else if (this.expenses[i].expenseGroup === "Utilities [$]") {
+    //     this.arr[2] += this.expenses[i].expenseAmount;
+    //   } else {
+    //     this.arr[3] += this.expenses[i].expenseAmount;
+    //   }
+    // }
+    // // Check outcome
+    // console.log(this.arr);
 
   }
 
