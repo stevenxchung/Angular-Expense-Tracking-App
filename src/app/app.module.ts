@@ -3,8 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+
 // Two way data-binding which will allow the form to retrieve and set it's value from the component class
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { DataService } from './data.service';
+import { environment } from '../environments/environment';
+
+// Form toasts
+import { ToastrModule } from 'ngx-toastr';
 
 // Firebase
 import { AngularFireModule } from 'angularfire2';
@@ -13,14 +20,12 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 // Adding ng2-charts
 import { ChartsModule } from 'ng2-charts';
 
-import { AppRoutingModule } from './app-routing.module';
+// Components
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { NavComponent } from './nav/nav.component';
-import { TrendsComponent } from './trends/trends.component';
-import { DataService } from './data.service';
 import { SummaryComponent } from './summary/summary.component';
-import { environment } from '../environments/environment';
+import { TrendsComponent } from './trends/trends.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +49,9 @@ import { environment } from '../environments/environment';
     ChartsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    ToastrModule.forRoot()
   ],
-  providers: [DataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
