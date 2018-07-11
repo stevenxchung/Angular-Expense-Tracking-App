@@ -1,75 +1,27 @@
-<div class="container color-dark">
-  <div class="col">
-    <p>Expense Form</p>
+<form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
+  <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="dataService.selectedExpense.$key">
+  <div class="form-group">
+    <label>Expense Group</label>
+    <input class="form-control" name="expenseGroup" #expenseGroup="ngModel" [(ngModel)]="dataService.selectedExpense.expenseGroup" placeholder="Expense Group" required>
   </div>
-  <div class="col">
-    <p>Recent Expenses ({{ itemCount }})</p>
+  <div class="form-group">
+    <label>Expense Name</label>
+    <input class="form-control" name="expenseName" #expenseName="ngModel" [(ngModel)]="dataService.selectedExpense.expenseName" placeholder="Expense Name" required>
   </div>
-</div>
-<div class="container color-light" [@formDB]="formDB.length">
-  <div class="col">
-
-    <form id="forms">
-    <div>
-        <label for="group">Expense Group</label>
-        <select
-          type="text"
-          class="txt"
-          name="group"
-          [(ngModel)]="group"
-        >
-          <option value="" disabled selected>Choose A Group</option>
-          <option value="Food [$]">Food</option>
-          <option value="Gas [$]">Gas</option>
-          <option value="Utilities [$]">Utilities</option>
-          <option value="Other [$]">Other</option>
-        </select>
-      </div>
-      <div>
-        <label for="item">Expense Name</label>
-        <input
-          type="text"
-          class="txt"
-          name="item"
-          placeholder="Enter the name of your expense..."
-          [(ngModel)]="name"
-        >
-      </div>
-      <div>
-          <label for="amount">Amount</label>
-          <input
-            class="txt"
-            type="number"
-            name="amount"
-            placeholder="Enter the amount..."
-            min="0.01"
-            step="0.01"
-            [(ngModel)]="amount"
-          >
-      </div>
-      <div>
-          <label for="date">Transaction Date</label>
-          <input
-            class="txt"
-            type="date"
-            name="date"
-            placeholder="Enter the date..."
-            [(ngModel)]="date"
-          >
-      </div>
-      <input type="submit" class="btn" (click)="addExpense()">
-    </form>
-
+  <div class="form-group">
+    <label>Expense Amount</label>
+    <input class="form-control" name="expenseAmount" #expenseAmount="ngModel" [(ngModel)]="dataService.selectedExpense.expenseAmount" placeholder="Expense Amount" required>
   </div>
-  <div class="col">
-    <p class="life-container" *ngFor="let e of formDB; let i = index" (click)="removeItem(i)">
-      {{
-        'Item: ' + e.expenseName
-        + ' ' + '-----' + ' '
-        + 'Amount: ' + '$' + e.expenseAmount
-        + ' ' + '-----' + ' '
-        + 'Date: ' + e.timeStamp +'\n'
-      }}
-    </p>
+  <div class="form-group">
+    <label>Expense Date</label>
+    <input class="form-control" name="timeStamp" #timeStamp="ngModel" [(ngModel)]="dataService.selectedExpense.timeStamp" placeholder="Expense Date" required>
   </div>
-</div>
+  <div class="form-group">
+    <button class="btn btn-default" type="submit" [disabled]="!expenseForm.valid">
+      <i class="fa fa-floppy-o"></i>
+      Submit</button>
+    <button class="btn btn-default" type="button" (click)="resetForm(expenseForm)">
+      <i class="fa fa-repeat"></i>
+      Reset</button>
+  </div>
+</form>
