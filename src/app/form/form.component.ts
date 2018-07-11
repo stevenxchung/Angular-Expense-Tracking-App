@@ -68,16 +68,16 @@ export class FormComponent implements OnInit {
     // this.dataService.updateDB(this.formDB);
     // // Update item count
     // this.itemCount = this.formDB.length;
-    // let x = this.dataService.getData();
-    // x.snapshotChanges().subscribe(item => {
-    //   this.expenseList = [];
-    //   item.forEach(element => {
-    //     let y = element.payload.toJSON();
-    //     y['$key'] = element.key;
-    //     this.expenseList.push(y as Expense);
-    //   });
-    // });
-    this.dataService.getData();
+
+    let x = this.dataService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.expenseList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.expenseList.push(y as Expense);
+      });
+    });
     this.resetForm();
   }
 
@@ -120,19 +120,19 @@ export class FormComponent implements OnInit {
       expenseForm.reset();
       this.dataService.selectedExpense = {
         $key: null,
-        expenseGroup: 'Test',
-        expenseName: 'Test',
-        expenseAmount: 0,
-        timeStamp: '2018-07-10'
+        expenseGroup: '',
+        expenseName: '',
+        expenseAmount: null,
+        timeStamp: ''
       }
     }
   }
 
-  // // Edit Entry
-  // onEdit(expense: Expense) {
-  //   // Use Object.assign() to make a copy of object (prevents modifying original data in real-time due to two-way-binding)
-  //   this.dataService.selectedExpense = Object.assign({}, expense);
-  // }
+  // Edit Entry
+  onEdit(expense: Expense) {
+    // Use Object.assign() to make a copy of object (prevents modifying original data in real-time due to two-way-binding)
+    this.dataService.selectedExpense = Object.assign({}, expense);
+  }
 
   // Remove and item from the list
   // removeItem(i) {
@@ -143,12 +143,12 @@ export class FormComponent implements OnInit {
   //   }
   //   this.dataService.updateDB(this.formDB);
   // }
-  // onDelete(key: string) {
-  //   if (confirm("Are you sure you want to delete this entry?") == true) {
-  //     this.dataService.deleteExpense(key);
-  //     this.toastr.warning('Deleted Successfully', 'Expense Form');
-  //   }
-  // }
+  onDelete(key: string) {
+    if (confirm("Are you sure you want to delete this entry?") == true) {
+      this.dataService.deleteExpense(key);
+      this.toastr.warning('Deleted Successfully', 'Expense Form');
+    }
+  }
 
 }
 
