@@ -15,6 +15,7 @@
 
 .color-light {
     background: #5f21c9;
+    padding: 2em;
 }
 
 .bottom-spacing {
@@ -47,6 +48,10 @@ input.btn {
     cursor:pointer;
 }
 
+.expense-table {
+    margin-top: 0.25em;
+}
+
 label {
     display: block;
     margin-bottom: 5px;
@@ -59,4 +64,13 @@ label {
 
 p {
     margin-top: 1rem;
+}
+
+td.ng-tns-c8-1 {
+    padding-top: 1em;
+}
+
+a.btn {
+    margin-top: -0.5em;
+    bottom: 1em;
 }
