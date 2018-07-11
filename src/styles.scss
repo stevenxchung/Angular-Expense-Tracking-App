@@ -1,15 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-// BriteCharts
-@import '../node_modules/britecharts/dist/css/common/common.min.css';
-@import '../node_modules/britecharts/dist/css/charts/bar.min.css';
-@import '../node_modules/britecharts/dist/css/charts/grouped-bar.min.css';
-@import '../node_modules/britecharts/dist/css/charts/stacked-bar.min.css';
-@import '../node_modules/britecharts/dist/css/charts/brush.min.css';
-@import '../node_modules/britecharts/dist/css/charts/line.min.css';
-@import '../node_modules/britecharts/dist/css/charts/donut.min.css';
-
 html,
 body {
     height: 100%;
@@ -17,4 +8,12 @@ body {
 
 body {
     margin: 0;
+}
+
+input.ng-invalid.ng-dirty {
+    border: 1px solid red;
+}
+
+button:hover, a.btn:hover {
+    cursor: pointer;
 }
