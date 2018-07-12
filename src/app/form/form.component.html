@@ -28,17 +28,6 @@
           <option value="Other [$]">Other</option>
         </select>
       </div>
-      <!-- <div class="form-group">
-          <label for="group">Expense Group</label>
-          <input
-            class="form-control"
-            name="expenseGroup"
-            #expenseGroup="ngModel"
-            placeholder="Enter the name of your expense group..."
-            [(ngModel)]="dataService.selectedExpense.expenseGroup"
-            required
-          >
-      </div> -->
       <div class="form-group">
         <label for="expenseName">Expense Name</label>
         <input
@@ -95,15 +84,6 @@
 
   </div>
   <div class="col expense-table">
-    <!-- <p class="life-container" *ngFor="let e of formDB; let i = index" (click)="removeItem(i)">
-      {{
-        'Item: ' + e.expenseName
-        + ' ' + '-----' + ' '
-        + 'Amount: ' + '$' + e.expenseAmount
-        + ' ' + '-----' + ' '
-        + 'Date: ' + e.timeStamp +'\n'
-      }}
-    </p> -->
     <table class="table table-sm table-hover">
       <tr>
         <th>Group</th>
