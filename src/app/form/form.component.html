@@ -84,10 +84,10 @@
           >
       </div>
       <div class="form-group">
-          <button class="btn btn-default" type="submit" [disabled]="!expenseForm.valid">
+          <button class="form-btn btn btn-default" type="submit" [disabled]="!expenseForm.valid">
             <i class="fa fa-floppy-o"></i>
             Submit</button>
-          <button class="btn btn-default" type="button" (click)="resetForm(expenseForm)">
+          <button class="form-btn btn btn-default" type="button" (click)="resetForm(expenseForm)">
             <i class="fa fa-repeat"></i>
             Reset</button>
         </div>
@@ -105,6 +105,14 @@
       }}
     </p> -->
     <table class="table table-sm table-hover">
+      <tr>
+        <th>Group</th>
+        <th>Name</th>
+        <th>Amount [$]</th>
+        <th>Expense Date</th>
+        <th></th>
+        <th></th>
+      </tr>
       <tr *ngFor="let expense of expenseList">
         <td>{{ expense.expenseGroup }}</td>
         <td>{{ expense.expenseName }}</td>
