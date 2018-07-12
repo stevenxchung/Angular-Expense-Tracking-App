@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { Expense } from '../expense.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-summary',
@@ -8,36 +10,45 @@ import { DataService } from '../data.service';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
+  // Use expenseList to store objects in an array
+  expenseList: Expense[];
+  summaryList: any;
 
-  expenses: any;
   // Initial total values for food, gas, utilities, and other expenses respectively
   arr = [0, 0, 0, 0];
 
   constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    // this.dataService.expense.subscribe(res => this.expenses = res);
-    // // console.log(this.expenses);
+    // Grab data from Firebase
+    let x = this.dataService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.expenseList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.expenseList.push(y as Expense);
+        this.expenseList.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
+      });
+      // console.log(this.expenseList);
+    });
 
-    // // Sort by date
-    // this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
-
-    // // Loop through the expenses database
-    // for (var i = 0; i < this.expenses.length; i++) {
-    //   // If the expenseGroup in object 'i' matches, add that expense amount
-    //   // to a particular slot in the arr above
-    //   if (this.expenses[i].expenseGroup === "Food [$]") {
-    //     this.arr[0] += this.expenses[i].expenseAmount;
-    //   } else if (this.expenses[i].expenseGroup === "Gas [$]") {
-    //     this.arr[1] += this.expenses[i].expenseAmount;
-    //   } else if (this.expenses[i].expenseGroup === "Utilities [$]") {
-    //     this.arr[2] += this.expenses[i].expenseAmount;
-    //   } else {
-    //     this.arr[3] += this.expenses[i].expenseAmount;
-    //   }
-    // }
-    // // Check outcome
-    // console.log(this.arr);
+    // Loop through the expenses database
+    for (var i = 0; i < this.expenseList.length; i++) {
+      // If the expenseGroup in object 'i' matches, add that expense amount
+      // to a particular slot in the arr above
+      if (this.expenseList[i].expenseGroup === "Food [$]") {
+        this.arr[0] += this.expenseList[i].expenseAmount;
+      } else if (this.expenseList[i].expenseGroup === "Gas [$]") {
+        this.arr[1] += this.expenseList[i].expenseAmount;
+      } else if (this.expenseList[i].expenseGroup === "Utilities [$]") {
+        this.arr[2] += this.expenseList[i].expenseAmount;
+      } else {
+        this.arr[3] += this.expenseList[i].expenseAmount;
+      }
+    }
+    // Check outcome
+    console.log(this.arr);
 
   }
 
