@@ -30,26 +30,27 @@
 //     font-family: Roboto;
 // }
 
-input.btn {
+.form-btn {
     border: 0;
-    display:block;
-    padding:1em 3em;
-    background:rgb(127, 255, 77);
-    color:#003A61;
-    margin-bottom:1em;
-    cursor:pointer;
+    display: inline-block;
+    padding: 1em 3em;
+    background: rgb(127, 255, 77);
+    color: #003A61;
+    margin-top: 1em;
+    cursor: pointer;
     font-family: Roboto;
 }
 
 .life-container {
-    background:#673ab7;
-    padding:.5em;
-    font-weight:bold;
-    cursor:pointer;
+    background: #673ab7;
+    padding: .5em;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .expense-table {
     margin-top: 0.25em;
+    text-align: center;
 }
 
 label {
