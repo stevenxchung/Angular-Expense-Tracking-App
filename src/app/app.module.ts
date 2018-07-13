@@ -7,7 +7,6 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
 // Two way data-binding which will allow the form to retrieve and set it's value from the component class
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { DataService } from './data.service';
 import { environment } from '../environments/environment';
 
 // Form toasts
