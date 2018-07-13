@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { Expense } from '../expense.model';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-summary',
@@ -12,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 export class SummaryComponent implements OnInit {
   // Use expenseList to store objects in an array
   expenseList: Expense[];
-  summaryList: any;
+  summarylist = [];
 
   // Initial total values for food, gas, utilities, and other expenses respectively
   arr = [0, 0, 0, 0];
@@ -30,25 +29,39 @@ export class SummaryComponent implements OnInit {
         this.expenseList.push(y as Expense);
         this.expenseList.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
       });
-      // console.log(this.expenseList);
+      // Debug Chart.js rendering
+      console.log("Inside subscribe " + this.expenseList);
+      buildArr(this.expenseList); // Strange resize render bug here
     });
 
-    // Loop through the expenses database
-    for (var i = 0; i < this.expenseList.length; i++) {
-      // If the expenseGroup in object 'i' matches, add that expense amount
-      // to a particular slot in the arr above
-      if (this.expenseList[i].expenseGroup === "Food [$]") {
-        this.arr[0] += this.expenseList[i].expenseAmount;
-      } else if (this.expenseList[i].expenseGroup === "Gas [$]") {
-        this.arr[1] += this.expenseList[i].expenseAmount;
-      } else if (this.expenseList[i].expenseGroup === "Utilities [$]") {
-        this.arr[2] += this.expenseList[i].expenseAmount;
-      } else {
-        this.arr[3] += this.expenseList[i].expenseAmount;
+    // Debug Chart.js rendering
+    setTimeout(() => {
+      console.log("Delayed expenseList " + this.expenseList);
+      console.log("Delayed this.arr " + this.arr);
+    }, 5000);
+
+    let buildArr = (x) => {
+      // Loop through the expenses database
+      for (var i = 0; i < x.length; i++) {
+        // If the expenseGroup in object 'i' matches, add that expense amount
+        // to a particular slot in the arr above
+        if (x[i].expenseGroup === "Food [$]") {
+          this.arr[0] += x[i].expenseAmount;
+        } else if (x[i].expenseGroup === "Gas [$]") {
+          this.arr[1] += x[i].expenseAmount;
+        } else if (x[i].expenseGroup === "Utilities [$]") {
+          this.arr[2] += x[i].expenseAmount;
+        } else {
+          this.arr[3] += x[i].expenseAmount;
+        }
       }
+      // Check outcome
+      console.log("Inside BuildArr() " + this.arr);
     }
-    // Check outcome
-    console.log(this.arr);
+
+    // Debug Chart.js rendering
+    console.log("Non-delayed expenseList " + this.expenseList);
+    console.log("Non-delayed this.arr " + this.arr);
 
   }
 
