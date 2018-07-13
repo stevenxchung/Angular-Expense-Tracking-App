@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6 col-sm-12 card" style="display: block">
-    <canvas baseChart height="100%" width="100%"
+    <canvas *ngIf="expenseList.length !== 0" baseChart height="100%" width="100%"
       [data]="doughnutChartData"
       [labels]="doughnutChartLabels"
       [colors]="doughnutChartColors"
@@ -10,6 +10,7 @@
   </div>
   <div class="col-lg-6 col-sm-12 expense-table">
     <!-- <button class="btn" (click)="randomize()">Change Dataset</button> -->
+    <h1>Recent Expenses</h1>
     <table class="table table-sm table-hover">
       <tr>
         <th>Group</th>
