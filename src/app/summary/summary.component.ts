@@ -82,6 +82,14 @@ export class SummaryComponent implements OnInit {
     }
   ];
 
+  public randomize():void {
+    let _doughnutChartData:Array<any> = new Array(this.doughnutChartData.length);
+    for (let i = 0; i < this.doughnutChartData.length; i++) {
+        _doughnutChartData[i] = Math.floor((Math.random() * 100) + 1);
+      }
+    this.doughnutChartData = _doughnutChartData;
+  }
+
   // events
   public chartClicked(e:any):void {
     console.log(e);
