@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-lg-6 col-sm-12">
     <div style="display: block;">
-    <canvas baseChart width="400" height="400"
+    <!-- Will only render canvas after expenseList object array has been loaded from Firebase -->
+    <canvas *ngIf="expenseList.length !== 0" baseChart width="400" height="400"
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
       [options]="lineChartOptions"
@@ -13,7 +14,7 @@
     </div>
   </div>
   <div class="col-lg-6 col-sm-12 expense-table">
-    <!-- <button class="btn" (click)="randomize()">Change Dataset</button> -->
+    <button class="btn" (click)="randomize()">Change Dataset</button>
     <h1>Recent Expenses</h1>
     <table class="table table-sm table-hover">
       <tr>
