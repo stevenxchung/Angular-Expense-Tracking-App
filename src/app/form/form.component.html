@@ -1,4 +1,4 @@
-<div class="container color-dark">
+<div class="container color-dark rounded-top">
   <div class="col">
     <p>Expense Form</p>
   </div>
@@ -6,7 +6,7 @@
     <p>Recent Expenses</p>
   </div>
 </div>
-<div class="container color-light">
+<div class="container color-light rounded-bottom">
   <div class="col">
 
     <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
@@ -76,7 +76,7 @@
           <button class="form-btn btn btn-default" type="submit" [disabled]="!expenseForm.valid">
             <i class="fa fa-floppy-o"></i>
             Submit</button>
-          <button class="form-btn btn btn-default" type="button" (click)="resetForm(expenseForm)">
+          <button class="form-btn btn btn-default reset" type="button" (click)="resetForm(expenseForm)">
             <i class="fa fa-repeat"></i>
             Reset</button>
         </div>
