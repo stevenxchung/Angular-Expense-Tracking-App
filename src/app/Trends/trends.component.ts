@@ -23,7 +23,7 @@ export class TrendsComponent implements OnInit {
   priceDB = [];
   dateDB = [];
 
-  constructor(private router: Router, private dataService: DataService) { }
+  constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit() {
     // Grab data from Firebase

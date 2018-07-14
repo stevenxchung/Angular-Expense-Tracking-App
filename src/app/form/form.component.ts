@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   // Use expenseList to store objects in an array
   expenseList: Expense[];
 
-  constructor(private dataService: DataService, private toastr: ToastrService) { }
+  constructor(public dataService: DataService, private toastr: ToastrService) { }
 
   // Called after data-bound properties of a directive are initialized
   ngOnInit() {

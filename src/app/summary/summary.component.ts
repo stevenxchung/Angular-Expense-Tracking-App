@@ -15,7 +15,7 @@ export class SummaryComponent implements OnInit {
   // Initial total values for food, gas, utilities, and other expenses respectively
   arr = [0, 0, 0, 0];
 
-  constructor(private router: Router, private dataService: DataService) { }
+  constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit() {
     // Grab data from Firebase
