@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { Expense } from '../expense.model';
 
 @Component({
   selector: 'app-trends',
@@ -8,8 +9,10 @@ import { DataService } from '../data.service';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
+  // Use expenseList to store objects in an array
+  expenseList: Expense[];
 
-  expenses: any;
+  // New array format for the trend plot
   arr = [
     {data: [], label: 'Food [$]'},
     {data: [], label: 'Gas [$]'},
@@ -23,49 +26,67 @@ export class TrendsComponent implements OnInit {
   constructor(private router: Router, private dataService: DataService) { }
 
   ngOnInit() {
-    // this.dataService.expense.subscribe(res => this.expenses = res);
-    // // console.log(this.expenses);
-    // // Create separate arrays for each item, price, and date
-    // // (might be a better way to do this, open to suggestions)
-    // this.expenses.map(e => this.itemDB.push(e.expenseName));
-    // this.expenses.map(e => this.priceDB.push(e.expenseAmount));
+    // Grab data from Firebase
+    var x = this.dataService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.expenseList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.expenseList.push(y as Expense);
+      });
+      // Debug Chart.js rendering
+      console.log("Inside subscribe " + this.expenseList);
+      // Build chart
+      buildChart(this.expenseList);
+      // Resort array
+      this.expenseList.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
+    });
 
-    // // Sort by date
-    // this.expenses.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
-    // // console.log(this.expenses);
+    // This will break down each object in the expenseList array and push into a new array format
+    let buildChart = (e) => {
+      // Create separate arrays for each item, price, and date
+      // (might be a better way to do this, open to suggestions)
+      this.expenseList.map(e => this.itemDB.push(e.expenseName));
+      this.expenseList.map(e => this.priceDB.push(e.expenseAmount));
 
-    // // Add dates, do not duplicate
-    // this.expenses.map(e => {
-    //   // Check if timestamp already exists, if not add to DB
-    //   if (this.dateDB.indexOf(e.timeStamp) === -1)
-    //     this.dateDB.push(e.timeStamp)
-    // });
+      // Sort by date
+      this.expenseList.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
+      // console.log(this.expenseList);
 
-    // // Loop through each element in the arr database
-    // for (var x = 0; x < this.arr.length; x++) {
-    //   // Loop through each element in dateDB (sorted)
-    //   for (var y = 0; y < this.dateDB.length; y++) {
-    //     // Prefill the data arrays
-    //     this.arr[x].data.push(0);
-    //     // Loop through each element in expenses
-    //     for (var z = 0; z < this.expenses.length; z++) {
-    //       // Check if the label matches
-    //       if (this.expenses[z].expenseGroup === this.arr[x].label) {
-    //         // Check if the timestamp matches
-    //         if (this.expenses[z].timeStamp === this.dateDB[y]) {
-    //           this.arr[x].data[y] = this.expenses[z].expenseAmount;
-    //         } else {
-    //           continue;
-    //         }
-    //       } else {
-    //         // Else, continue to the next expense
-    //         continue;
-    //       }
-    //     }
-    //   }
-    // }
-    // // Check outcome
-    // console.log(this.arr);
+      // Add dates, do not duplicate
+      this.expenseList.map(e => {
+        // Check if timestamp already exists, if not add to DB
+        if (this.dateDB.indexOf(e.timeStamp) === -1)
+          this.dateDB.push(e.timeStamp)
+      });
+
+      // Loop through each element in the arr database
+      for (var x = 0; x < this.arr.length; x++) {
+        // Loop through each element in dateDB (sorted)
+        for (var y = 0; y < this.dateDB.length; y++) {
+          // Prefill the data arrays
+          this.arr[x].data.push(0);
+          // Loop through each element in expenses
+          for (var z = 0; z < this.expenseList.length; z++) {
+            // Check if the label matches
+            if (this.expenseList[z].expenseGroup === this.arr[x].label) {
+              // Check if the timestamp matches
+              if (this.expenseList[z].timeStamp === this.dateDB[y]) {
+                this.arr[x].data[y] = this.expenseList[z].expenseAmount;
+              } else {
+                continue;
+              }
+            } else {
+              // Else, continue to the next expense
+              continue;
+            }
+          }
+        }
+      }
+      // Check outcome
+      console.log(this.arr);
+    }
 
   }
 
