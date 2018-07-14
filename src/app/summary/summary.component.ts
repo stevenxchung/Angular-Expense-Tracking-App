@@ -11,7 +11,6 @@ import { Expense } from '../expense.model';
 export class SummaryComponent implements OnInit {
   // Use expenseList to store objects in an array
   expenseList: Expense[];
-  summarylist = [];
 
   // Initial total values for food, gas, utilities, and other expenses respectively
   arr = [0, 0, 0, 0];
@@ -20,7 +19,7 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
     // Grab data from Firebase
-    let x = this.dataService.getData();
+    var x = this.dataService.getData();
     x.snapshotChanges().subscribe(item => {
       this.expenseList = [];
       item.forEach(element => {
