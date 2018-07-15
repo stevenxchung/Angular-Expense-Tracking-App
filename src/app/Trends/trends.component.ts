@@ -19,8 +19,6 @@ export class TrendsComponent implements OnInit {
     {data: [], label: 'Utilities [$]'},
     {data: [], label: 'Other [$]'}
   ];
-  itemDB = [];
-  priceDB = [];
   dateDB = [];
 
   constructor(private router: Router, public dataService: DataService) { }
@@ -45,11 +43,6 @@ export class TrendsComponent implements OnInit {
 
     // This will break down each object in the expenseList array and push into a new array format
     let buildChart = (e) => {
-      // Create separate arrays for each item, price, and date
-      // (might be a better way to do this, open to suggestions)
-      this.expenseList.map(e => this.itemDB.push(e.expenseName));
-      this.expenseList.map(e => this.priceDB.push(e.expenseAmount));
-
       // Sort by date
       this.expenseList.sort((a, b) => +new Date(a.timeStamp) - +new Date(b.timeStamp));
       // console.log(this.expenseList);
