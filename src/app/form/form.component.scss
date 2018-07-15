@@ -6,7 +6,8 @@
 }
 
 .col {
-    padding: .4em 1.3em;
+    padding: 2em 2em;
+    color: white;
 }
 
 .color-dark {
@@ -55,6 +56,14 @@
 
 .reset {
     margin-left: 1em;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
 }
 
 label {
