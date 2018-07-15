@@ -25,6 +25,7 @@ import { FormComponent } from './form/form.component';
 import { NavComponent } from './nav/nav.component';
 import { SummaryComponent } from './summary/summary.component';
 import { TrendsComponent } from './trends/trends.component';
+import { ProfilesComponent } from './profiles/profiles.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TrendsComponent } from './trends/trends.component';
     FormComponent,
     NavComponent,
     TrendsComponent,
-    SummaryComponent
+    SummaryComponent,
+    ProfilesComponent
   ],
   imports: [
     BrowserModule,
