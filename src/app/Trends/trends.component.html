@@ -15,15 +15,13 @@
   </div>
   <div class="col-lg-6 col-sm-12 expense-table">
     <button class="btn" (click)="randomize()">Change Dataset</button>
-    <h1>Recent Expenses</h1>
+    <h2>Recent Expenses</h2>
     <table class="table table-sm table-hover">
       <tr>
         <th>Group</th>
         <th>Name</th>
         <th>Amount [$]</th>
         <th>Expense Date</th>
-        <th></th>
-        <th></th>
       </tr>
       <tr *ngFor="let expense of expenseList">
         <td>{{ expense.expenseGroup }}</td>
