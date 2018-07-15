@@ -2,7 +2,6 @@
   <mat-sidenav
     #drawer
     class="sidenav"
-    [ngClass]="{hidden: !(isHandset$ | async)}"
     fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -32,51 +31,10 @@
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Expense Tracking App</span>
-      <span class="spacer"></span>
-      <span
-        class="links"
-        [ngClass]="{hiddenLinks: (isHandset$ | async)}"
-      >
-        <mat-icon
-          class="nav-icon"
-        >list</mat-icon>
-        <a
-          routerLink=""
-          [class.activated]="currentUrl == '/'"
-        >
-        &nbsp;&nbsp;&nbsp;&nbsp;Form</a>
-      </span>
-      <span
-        class="links"
-        [ngClass]="{hiddenLinks: (isHandset$ | async)}"
-      >
-        <mat-icon
-          class="nav-icon"
-        >pie_chart</mat-icon>
-        <a
-          routerLink="/summary"
-          [class.activated]="currentUrl == '/summary'"
-        >
-        &nbsp;&nbsp;&nbsp;&nbsp;Summary</a>
-      </span>
-      <span
-        class="links"
-        [ngClass]="{hiddenLinks: (isHandset$ | async)}"
-      >
-        <mat-icon
-          class="nav-icon"
-        >trending_up</mat-icon>
-        <a
-          routerLink="/trends"
-          [class.activated]="currentUrl == '/trends'"
-        >
-        &nbsp;&nbsp;&nbsp;&nbsp;Trends</a>
-      </span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
