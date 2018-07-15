@@ -1,14 +1,5 @@
-<div class="container color-dark rounded-top">
-  <div class="col">
-    <p>Expense Form</p>
-  </div>
-  <div class="col">
-    <p>Recent Expenses</p>
-  </div>
-</div>
-<div class="container color-light rounded-bottom">
-  <div class="col">
-
+<div class="row fade-in">
+  <div class="col-lg-6 col-sm-12 card color-dark col" style="display: block">
     <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
       <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="dataService.selectedExpense.$key">
       <div>
@@ -34,7 +25,7 @@
           class="form-control"
           name="expenseName"
           #expenseName="ngModel"
-          placeholder="Enter the name of your expense..."
+          placeholder="Expense name..."
           [(ngModel)]="dataService.selectedExpense.expenseName"
           required
         >
@@ -52,7 +43,7 @@
                 type="number"
                 name="expenseAmount"
                 #expenseAmount="ngModel"
-                placeholder="Enter the amount..."
+                placeholder="Expense amount..."
                 min="0.01"
                 step="0.01"
                 [(ngModel)]="dataService.selectedExpense.expenseAmount"
@@ -81,9 +72,8 @@
             Reset</button>
         </div>
     </form>
-
   </div>
-  <div class="col expense-table">
+  <div class="col-lg-6 col-sm-12 expense-table">
     <table class="table table-sm table-hover">
       <tr>
         <th>Group</th>
