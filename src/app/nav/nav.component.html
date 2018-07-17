@@ -8,6 +8,11 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
+      <a mat-list-item routerLink="/profiles">
+        <mat-icon>account_circle</mat-icon>
+        &nbsp;&nbsp;
+        Profiles
+      </a>
       <a mat-list-item routerLink="">
         <mat-icon>list</mat-icon>
         &nbsp;&nbsp;
