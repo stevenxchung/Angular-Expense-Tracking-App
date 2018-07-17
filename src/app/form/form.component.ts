@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service';
+import { ProfileService } from '../profile.service';
 import { Expense } from '../expense.model';
+import { Profile } from '../profile.model';
 import { ToastrService } from 'ngx-toastr';
 // Import animations
 import {
@@ -20,16 +22,32 @@ import {
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  // Use expenseList to store objects in an array
+  // Object store
+  profileList: Profile[];
   expenseList: Expense[];
 
-  constructor(public dataService: DataService, private toastr: ToastrService) { }
+  constructor(public dataService: DataService, public profileService: ProfileService, private toastr: ToastrService) { }
 
   // Called after data-bound properties of a directive are initialized
   ngOnInit() {
+    // Load profiles
+    // On app load, will grab data from the firebase database "profiles" and load them onto the Profile[] array
+    let x1 = this.profileService.getData();
+    x1.snapshotChanges().subscribe(item => {
+      this.profileList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.profileList.push(y as Profile);
+      });
+    });
+  }
+
+  onSelect(profileName) {
+    console.log("onSelect Triggered!");
     // On app load, will grab data from the firebase database "expenses" and load them onto the Expense[] array
-    let x = this.dataService.getData();
-    x.snapshotChanges().subscribe(item => {
+    let x2 = this.dataService.getData(profileName);
+    x2.snapshotChanges().subscribe(item => {
       this.expenseList = [];
       item.forEach(element => {
         let y = element.payload.toJSON();
@@ -67,7 +85,7 @@ export class FormComponent implements OnInit {
     }
   }
 
-  // Edit Entry
+  // Edit entry
   onEdit(expense: Expense) {
     // Use Object.assign() to make a copy of object (prevents modifying original data in real-time due to two-way-binding)
     this.dataService.selectedExpense = Object.assign({}, expense);
