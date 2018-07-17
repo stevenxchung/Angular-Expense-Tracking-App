@@ -18,11 +18,11 @@ export class NavComponent {
     );
 
   currentUrl: string;
-    
+
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
     router.events.subscribe(
       (_: NavigationEnd) => this.currentUrl =_.url
     );
   }
-  
-  }
+
+}
