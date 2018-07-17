@@ -17,8 +17,9 @@ export class DataService {
   constructor(private firebase: AngularFireDatabase) { }
 
   // READ
-  getData() {
-    this.expenseList = this.firebase.list('expenses');
+  getData(profileName) {
+    // Depending on what profile name is selected, will grab data from that specific profile
+    this.expenseList = this.firebase.list(profileName + '/expenses');
     return this.expenseList;
   }
 
