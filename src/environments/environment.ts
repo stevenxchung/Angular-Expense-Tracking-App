@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "**REMOVED**",
+    apiKey: "*****",
     authDomain: "expense-tracking-app-demo.firebaseapp.com",
     databaseURL: "https://expense-tracking-app-demo.firebaseio.com",
     projectId: "expense-tracking-app-demo",
