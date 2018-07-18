@@ -1,8 +1,7 @@
-<div class="row fade-in" *ngIf="expenseList.length !== 0">
+<div class="row fade-in">
   <div class="col-lg-6 col-sm-12">
-    <div style="display: block;">
     <!-- Will only render canvas after expenseList object array has been loaded from Firebase -->
-    <canvas baseChart width="400" height="400"
+    <canvas baseChart width="400" height="400" *ngIf="expenseList.length !== 0"
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
       [options]="lineChartOptions"
@@ -11,10 +10,27 @@
       [chartType]="lineChartType"
       (chartHover)="chartHovered($event)"
       (chartClick)="chartClicked($event)"></canvas>
-    </div>
   </div>
   <div class="col-lg-6 col-sm-12 expense-table">
-    <button class="btn" (click)="randomize()">Change Dataset</button>
+    <button class="btn" (click)="randomize()">Randomize!</button>
+
+    <!-- Only click works for select here -->
+    <div>
+        <label for="profileName">Expense Profile</label>
+        <select
+          type="text"
+          class="form-control bottom-spacing"
+          name="profileName"
+          #profileName="ngModel"
+          [(ngModel)]="profileService.selectedProfile.profileName"
+          (change)="onSelect(profileService.selectedProfile.profileName)"
+          required
+        >
+          <option value="" disabled selected>Select A Profile</option>
+          <option *ngFor="let profile of profileList" value="{{ profile.profileName }}">{{ profile.profileName }}</option>
+        </select>
+    </div>
+
     <h2>Recent Expenses</h2>
     <table class="table table-sm table-hover">
       <tr>

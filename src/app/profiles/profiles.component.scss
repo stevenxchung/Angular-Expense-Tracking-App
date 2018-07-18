@@ -1,0 +1,90 @@
+.container {
+    display: grid;
+    grid-template-columns: 50% auto;
+    color: white;
+    font-family: Roboto;
+}
+
+.col {
+    padding: 2em 2em;
+    color: white;
+}
+
+.color-dark {
+    background: #673ab7;
+}
+
+.color-light {
+    background: #5f21c9;
+    padding: 2em;
+}
+
+.bottom-spacing {
+    margin-bottom: 1em;
+}
+
+// .txt {
+//     border: 0;
+//     padding: 1em;
+//     width: 80%;
+//     margin-bottom: 2em;
+//     font-family: Roboto;
+// }
+
+.form-btn {
+    border: 0;
+    display: inline-block;
+    padding: 1em 3em;
+    background: rgb(127, 255, 77);
+    color: #003A61;
+    margin-top: 1em;
+    cursor: pointer;
+    font-family: Roboto;
+}
+
+.life-container {
+    background: #673ab7;
+    padding: .5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-table {
+    margin-top: 0.25em;
+    text-align: center;
+}
+
+.reset {
+    margin-left: 1em;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#forms {
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+p {
+    margin-top: 1rem;
+}
+
+td.ng-tns-c8-1 {
+    padding-top: 1em;
+}
+
+a.btn {
+    margin-top: -0.5em;
+    bottom: 1em;
+}

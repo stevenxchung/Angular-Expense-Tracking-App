@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { ProfileService } from '../profile.service';
 import { Expense } from '../expense.model';
+import { Profile } from '../profile.model';
 
 @Component({
   selector: 'app-trends',
@@ -9,7 +11,8 @@ import { Expense } from '../expense.model';
   styleUrls: ['./trends.component.scss']
 })
 export class TrendsComponent implements OnInit {
-  // Use expenseList to store objects in an array
+  // Object store
+  profileList: Profile[];
   expenseList: Expense[];
 
   // New array format for the trend plot
@@ -21,11 +24,26 @@ export class TrendsComponent implements OnInit {
   ];
   dateDB = [];
 
-  constructor(private router: Router, public dataService: DataService) { }
+  constructor(private router: Router, public dataService: DataService, public profileService: ProfileService) { }
 
   ngOnInit() {
+    // Load profiles
+    // On app load, will grab data from the firebase database "profiles" and load them onto the Profile[] array
+    let summaryX1 = this.profileService.getData();
+    summaryX1.snapshotChanges().subscribe(item => {
+      this.profileList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.profileList.push(y as Profile);
+      });
+      this.onSelect('Demo Expenses');
+    });
+  }
+
+  onSelect(profileName) {
     // Grab data from Firebase
-    var x = this.dataService.getData();
+    var x = this.dataService.getData(profileName);
     x.snapshotChanges().subscribe(item => {
       this.expenseList = [];
       item.forEach(element => {
@@ -81,11 +99,37 @@ export class TrendsComponent implements OnInit {
       console.log(this.arr);
     }
 
+    // Change dataset on click, delay to allow buildArr() to process
+    setTimeout(() => {
+      // Start with an empty dateDB to allow x-axis to re-adjust to new labels
+      this.lineChartLabels.length = 0;
+      console.log("Start " + this.lineChartLabels + " Length: " + this.lineChartLabels.length);
+      let _lineChartData:Array<any> = new Array(this.lineChartData.length);
+      for (let i = 0; i < this.lineChartData.length; i++) {
+        _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
+        for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+          _lineChartData[i].data[j] = this.arr[i].data[j];
+          // Only add defined dates
+          if (this.dateDB[j] !== undefined) {
+            this.lineChartLabels[j] = this.dateDB[j];
+          }
+        }
+      }
+      this.lineChartData = _lineChartData;
+      console.log("End " + this.lineChartLabels + " Length: " + this.lineChartLabels.length);
+      // Must reset variables
+      this.arr = [
+        {data: [], label: 'Food [$]'},
+        {data: [], label: 'Gas [$]'},
+        {data: [], label: 'Utilities [$]'},
+        {data: [], label: 'Other [$]'}
+      ];
+      this.dateDB = [];
+    }, 200);
   }
 
   // Add line chart from ng2-charts
   public lineChartData:Array<any> = this.arr;
-
   public lineChartLabels:Array<any> = this.dateDB;
   public lineChartOptions:any = {
     responsive: true

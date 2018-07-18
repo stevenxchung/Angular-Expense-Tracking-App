@@ -1,3 +1,63 @@
-<p>
-  profiles works!
-</p>
+<div class="row fade-in">
+    <div class="col-lg-6 col-sm-12 card color-dark col" style="display: block">
+
+      <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+        <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="profileService.selectedProfile.$key">
+        <div class="form-group">
+          <label for="owner">Owner</label>
+          <input
+            class="form-control"
+            name="owner"
+            #owner="ngModel"
+            placeholder="e.g., Steven Chung..."
+            [(ngModel)]="profileService.selectedProfile.owner"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="profileName">Profile Name</label>
+          <input
+            class="form-control"
+            name="profileName"
+            #profileName="ngModel"
+            placeholder="e.g., Steven's Monthly Expenses..."
+            [(ngModel)]="profileService.selectedProfile.profileName"
+            required
+          >
+        </div>
+        <div class="form-group">
+            <button class="form-btn btn btn-default" type="submit" [disabled]="!profileForm.valid">
+              <i class="fa fa-user-plus"></i>
+              Create</button>
+            <button class="form-btn btn btn-default reset" type="button" (click)="resetForm(profileForm)">
+              <i class="fa fa-repeat"></i>
+              Reset</button>
+          </div>
+      </form>
+
+    </div>
+    <div class="col-lg-6 col-sm-12 profile-table">
+
+      <table class="table table-sm table-hover">
+        <tr>
+          <th>Owner</th>
+          <th>Profile Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let profile of profileList">
+          <td>{{ profile.owner }}</td>
+          <td>{{ profile.profileName }}</td>
+          <td>
+            <a class="btn" (click)="onEdit(profile)">
+              <i class="fa fa-pencil-square-o"></i>
+            </a>
+            <a class="btn" (click)="onDelete(profile.$key)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>

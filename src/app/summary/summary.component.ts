@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
+import { ProfileService } from '../profile.service';
 import { Expense } from '../expense.model';
+import { Profile } from '../profile.model';
 
 @Component({
   selector: 'app-summary',
@@ -9,18 +11,39 @@ import { Expense } from '../expense.model';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent implements OnInit {
-  // Use expenseList to store objects in an array
+  // Object store
+  profileList: Profile[];
   expenseList: Expense[];
 
   // Initial total values for food, gas, utilities, and other expenses respectively
   arr = [0, 0, 0, 0];
 
-  constructor(private router: Router, public dataService: DataService) { }
+  constructor(private router: Router, public dataService: DataService, public profileService: ProfileService) { }
 
   ngOnInit() {
+    // Load profiles
+    // On app load, will grab data from the firebase database "profiles" and load them onto the Profile[] array
+    let summaryX1 = this.profileService.getData();
+    summaryX1.snapshotChanges().subscribe(item => {
+      this.profileList = [];
+      item.forEach(element => {
+        let y = element.payload.toJSON();
+        y['$key'] = element.key;
+        this.profileList.push(y as Profile);
+      });
+      this.onSelect('Demo Expenses');
+      console.log(this.profileList);
+    });
+  }
+
+  onSelect(profileName) {
+    console.log("onSelect Triggered!");
+    // Must reset array
+    this.arr = [0, 0, 0, 0];
+
     // Grab data from Firebase
-    var x = this.dataService.getData();
-    x.snapshotChanges().subscribe(item => {
+    let summaryX2 = this.dataService.getData(profileName);
+    summaryX2.snapshotChanges().subscribe(item => {
       this.expenseList = [];
       item.forEach(element => {
         let y = element.payload.toJSON();
@@ -29,15 +52,15 @@ export class SummaryComponent implements OnInit {
         this.expenseList.sort((a, b) => +new Date(b.timeStamp) - +new Date(a.timeStamp));
       });
       // Debug Chart.js rendering
-      console.log("Inside subscribe " + this.expenseList);
+      // console.log("Inside subscribe " + this.expenseList);
       buildArr(this.expenseList); // Strange resize render bug here
     });
 
     // Debug Chart.js rendering
-    setTimeout(() => {
-      console.log("Delayed expenseList " + this.expenseList);
-      console.log("Delayed this.arr " + this.arr);
-    }, 5000);
+    // setTimeout(() => {
+    //   console.log("Delayed expenseList " + this.expenseList);
+    //   console.log("Delayed this.arr " + this.arr);
+    // }, 5000);
 
     let buildArr = (x) => {
       // Loop through the expenses database
@@ -55,13 +78,21 @@ export class SummaryComponent implements OnInit {
         }
       }
       // Check outcome
-      console.log("Inside BuildArr() " + this.arr);
+      // console.log("Inside BuildArr() " + this.arr);
     }
 
     // Debug Chart.js rendering
-    console.log("Non-delayed expenseList " + this.expenseList);
-    console.log("Non-delayed this.arr " + this.arr);
+    // console.log("Non-delayed expenseList " + this.expenseList);
+    // console.log("Non-delayed this.arr " + this.arr);
 
+    // Change dataset on click, add delay to allow array to process
+    setTimeout(() => {
+      let _doughnutChartData:Array<any> = new Array(this.doughnutChartData.length);
+      for (let i = 0; i < this.doughnutChartData.length; i++) {
+          _doughnutChartData[i] = this.arr[i];
+        }
+      this.doughnutChartData = _doughnutChartData;
+    }, 100);
   }
 
   // Doughnut
