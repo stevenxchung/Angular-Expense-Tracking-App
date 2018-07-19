@@ -38,9 +38,10 @@ export class ProfileService {
       });
   }
 
-  // DELETE
-  deleteProfile($key: string) {
+  // DELETE Profile
+  deleteProfile($key: string, profileName: string) {
+    // Delete profile from the profileList array as well as the entire profile with expense data
     this.profileList.remove($key);
+    this.firebase.list(profileName).remove();
   }
-
 }
