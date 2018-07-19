@@ -12,7 +12,6 @@
   <div class="col-lg-6 col-sm-12 expense-table" style="display: block">
     <button class="btn" (click)="randomize()">Randomize!</button>
 
-    <!-- Only click works for select here -->
     <div>
       <label for="profileName">Expense Profile</label>
       <select
@@ -21,7 +20,7 @@
         name="profileName"
         #profileName="ngModel"
         [(ngModel)]="profileService.selectedProfile.profileName"
-        (click)="onSelect(profileService.selectedProfile.profileName)"
+        (change)="onSelect(profileService.selectedProfile.profileName)"
         required
       >
         <option value="" disabled selected>Select A Profile</option>
