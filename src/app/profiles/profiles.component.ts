@@ -61,9 +61,10 @@ export class ProfilesComponent implements OnInit {
   }
 
   // Remove and item from the list
-  onDelete(key: string) {
-    if (confirm("Are you sure you want to delete this entry?") == true) {
-      this.profileService.deleteProfile(key);
+  onDelete($key: string, profileName: string) {
+    if (confirm("Are you sure you want to delete this profile?") == true) {
+      // Delete profile from the profileList array as well as the entire profile with expense data
+      this.profileService.deleteProfile($key, profileName);
       this.toastr.warning('Deleted Successfully', 'Expense Form');
     }
   }
