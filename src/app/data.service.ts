@@ -17,7 +17,7 @@ export class DataService {
   constructor(private firebase: AngularFireDatabase) { }
 
   // READ
-  getData(profileName) {
+  getData(profileName: string) {
     // Depending on what profile name is selected, will grab data from that specific profile
     this.expenseList = this.firebase.list(profileName + '/expenses');
     return this.expenseList;
@@ -48,5 +48,4 @@ export class DataService {
   deleteExpense($key: string) {
     this.expenseList.remove($key);
   }
-
 }
