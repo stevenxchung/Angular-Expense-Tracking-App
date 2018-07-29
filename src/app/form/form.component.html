@@ -1,5 +1,5 @@
 <div class="row fade-in">
-  <div class="col-lg-6 col-sm-12 color-dark col" style="display: block">
+  <div class="col-lg-6 col-sm-12 card color-dark col" style="display: block">
 
     <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
       <input type="hidden" name="$key" #$key="ngModel" [(ngModel)]="dataService.selectedExpense.$key">
