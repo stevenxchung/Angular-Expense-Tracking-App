@@ -31,19 +31,21 @@
     </div>
 
     <h2>Recent Expenses</h2>
-    <table class="table table-sm table-hover">
-      <tr>
-        <th>Group</th>
-        <th>Name</th>
-        <th>Amount [$]</th>
-        <th>Expense Date</th>
-      </tr>
-      <tr *ngFor="let expense of expenseList">
-        <td>{{ expense.expenseGroup }}</td>
-        <td>{{ expense.expenseName }}</td>
-        <td>{{ expense.expenseAmount }}</td>
-        <td>{{ expense.timeStamp }}</td>
-      </tr>
-    </table>
+    <div class="scrollable-table">
+      <table class="table table-sm table-hover">
+        <tr>
+          <th>Group</th>
+          <th>Name</th>
+          <th>Amount [$]</th>
+          <th>Expense Date</th>
+        </tr>
+        <tr *ngFor="let expense of expenseList">
+          <td>{{ expense.expenseGroup }}</td>
+          <td>{{ expense.expenseName }}</td>
+          <td>{{ expense.expenseAmount }}</td>
+          <td>{{ expense.timeStamp }}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
