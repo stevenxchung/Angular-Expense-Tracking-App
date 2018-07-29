@@ -15,6 +15,11 @@
     padding: 50px;
     padding-left: 50px;
     border-radius: 10px;
+    overflow-x: auto;
+}
+
+.scrollable-table {
+    overflow-x: auto;
 }
 
 h2 {
